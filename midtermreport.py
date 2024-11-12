@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
+import os
 
 # Set the title of your app
 st.title("Cardiovascular Disease Classification Project")
@@ -28,27 +27,27 @@ st.markdown("""
             -Since our data focuses on individuals in their middle age, spanning a height range from 5’3" (160 cm) to 6’6" (198 cm) for men and the 4’10’’ (147cm) to 6’1’’ (185cm) for women, according to the 2007-2008 census data [3]. It's worth noting that the cumulative percentage of the population falling outside this range is roughly 1%. Consequently, we classify these data points as outliers and exclude them from our dataset. The box plot of data after removal shows lower variability with a few tall individuals.
 """)
             
-st.image("/Users/ariasharma/Desktop/height1.png", use_column_width=True)
-st.image("/Users/ariasharma/Desktop/height2.png", use_column_width=True)
+st.image("height1.png", use_container_width=True)
+st.image("height2.png", use_container_width=True)
 
 st.markdown("""
     - **Weight:** 
             -Since our data focuses on individuals in their middle age, spanning a height range from 5’3" (160 cm) to 6’6" (198 cm) for men and the 4’10’’ (147cm) to 6’1’’ (185cm) for women, according to the 2007-2008 census data [3]. It's worth noting that the cumulative percentage of the population falling outside this range is roughly 1%. Consequently, we classify these data points as outliers and exclude them from our dataset. The box plot of data after removal shows lower variability with a few tall individuals. 
 """)
-st.image("/Users/ariasharma/Desktop/weight1.png", use_column_width=True)
-st.image("/Users/ariasharma/Desktop/weight2.png", use_column_width=True)
+st.image("weight1.png", use_container_width=True)
+st.image("weight2.png", use_container_width=True)
 
 
 st.markdown("""
 
     - **Blood Pressure:** 
             -The systolic and diastolic blood pressures range from normal 90/60 mm Hg to stage 2 hypertension 160/100 mm Hg [5]. Any pressure outside of this range is considered life threatening emergency. So, we excluded those datapoints with buffer of +/- 30mm Hg.  """)
-st.image("/Users/ariasharma/Desktop/bp1.png", use_column_width=True)
-st.image("/Users/ariasharma/Desktop/bp2.png", use_column_width=True)
+st.image("bp1.png", use_container_width=True)
+st.image("bp2.png", use_container_width=True)
 
 
 st.write("We considered applying Principal Component Analysis to the original and the validated datasets to visualize any possible outlier groups. Based on plot PCA plot using 1st and 2nd components, there is no big cluster of outliers so all remaining datapoints are kept.")
-st.image("/Users/ariasharma/Desktop/graph1.png", use_column_width=True)
+st.image("graph1.png", use_container_width=True)
 
 st.markdown("""
 2. **_Feature Engineering_**
@@ -57,7 +56,7 @@ st.markdown("""
 st.markdown("""
     -In the original dataset, ages were recorded in days, leading to unnecessary variation. To address this, we converted the unit from days to years. The boxplot reveals that our data primarily focuses on individuals in their middle age. 
 """)
-st.image("/Users/ariasharma/Desktop/featureengineering.png", use_column_width=True)
+st.image("featureengineering.png", use_container_width=True)
 st.markdown("""
     -We combined height and weight to calculate BMI to further evaluate the validity of our dataset. Most BMI reports don’t record BMI that is higher than 60 so we excluded those data from as well. """)
 
@@ -69,7 +68,11 @@ st.markdown("""
 
 st.write("After data-processing, the correlation matrix is as below. Since there are only 12 features, we decided to keep them all. ")
 
-st.image("/Users/ariasharma/Desktop/correlationmatrix.png", use_column_width=True)
+if os.path.exists("correlationmatrix.png"):
+    st.image("correlationmatrix.png", use_container_width=True)
+else:
+    st.write("File not found: correlationmatrix.png")
+
 
 st.write("Upon examining the correlation matrix between features, it shows that the majority do not exhibit high correlation, suggesting our dataset is complex and potentially contains both linear and non-linear relationships. Given the dataset's size of 70,000 entries and its complexity, the Random Forest algorithm initially seemed like the ideal choice for our project. However, we still want to explore other, simpler algorithms to verify whether our initial assumption about the dataset's large size and complexity is accurate. Two algorithms under consideration are logistic regression, which can serve as a basic benchmark but assumes the linear relationship between features, and SVM, which is effective for high-dimensional spaces but slow on large datasets. We chose to implement linear regression first to achieve a general baseline for performance that we could compare other models to. We then proceeded to have working implementations of our other two proposed supervised learning models: SVM and Random Forest. We found that SVM currently has a much poorer performance than both linear regression and random forest, and we plan to improve the performance of the SVM algorithm by tuning parameters and experimenting with different kernels. We found that linear regression and random forest return very similar results, which will be discussed further in the next section. We chose our supervised learning models carefully, specifically choosing linear regression to obtain a good baseline for performance, choosing SVM because we have a high-dimensional feature space, and choosing random forest because of its flexibility and ability to model nonlinear relationships. We have also brainstormed which unsupervised models we will use. We have already used PCA to reduce the dimensionality of the feature space, but we have used this solely for visualization up to this point, rather than using it to simplify our data. Therefore, we are planning to employ PCA in the future more directly. We are also considering using k-means clustering, specifically with two clusters, since this is a binary classification problem.  ")
 
