@@ -74,8 +74,17 @@ else:
 
 st.write("Upon examining the correlation matrix between features, it shows that the majority do not exhibit high correlation, suggesting our dataset is complex and potentially contains both linear and non-linear relationships. Given the dataset's size of 70,000 entries and its complexity, the Random Forest algorithm initially seemed like the ideal choice for our project. However, we still want to explore other, simpler algorithms to verify whether our initial assumption about the dataset's large size and complexity is accurate. Two algorithms under consideration are logistic regression, which can serve as a basic benchmark but assumes the linear relationship between features, and SVM, which is effective for high-dimensional spaces but slow on large datasets. We chose to implement logistic regression first to achieve a general baseline for performance that we could compare other models to. We then proceeded to have working implementations of our other two proposed supervised learning models: SVM and Random Forest. We found that SVM currently has a much poorer performance than both logistic regression and random forest, and we plan to improve the performance of the SVM algorithm by tuning parameters and experimenting with different kernels. We found that logistic regression and random forest return very similar results, which will be discussed further in the next section. We chose our supervised learning models carefully, specifically choosing logistic regression to obtain a good baseline for performance, choosing SVM because we have a high-dimensional feature space, and choosing random forest because of its flexibility and ability to model nonlinear relationships. We have also brainstormed which unsupervised models we will use. We have already used PCA to reduce the dimensionality of the feature space, but we have used this solely for visualization up to this point, rather than using it to simplify our data. Therefore, we are planning to employ PCA in the future more directly. We are also considering using k-means clustering, specifically with two clusters, since this is a binary classification problem.  ")
 
-st.subheader("(Potential) Results and Discussion")
+st.subheader("Results and Discussion")
 st.write("For this project, we will evaluate our ML model using several quantitative metrics.")
+
+st.markdown("""
+    - **Accuracy**
+            -To measure the proportion of true results (true positives & true negatives) among the total cases. Our goal is to achieve accuracy exceeding 85%, which would indicate strong model performance. Furthermore, we are looking to measure false positive and false negative counts, since those values are crucial when providing a medical diagnosis.
+    - **F1 Score**
+            -To balance precision and recall. Using the F1 score would help us minimize false positives while accurately identifying patients with cardiovascular disease. We aim for an F1 Score of at least 0.75. 
+    - **Receiver Operating Characteristic**       
+            -To assess the model’s ability to accurately distinguish between patients with and without cardiovascular disease. We aim for our mode to have a ROC-AUC score above 0.80. 
+""")
 data = {
     "Models": ["Logistic Regression", "Random Forest", "SVM"],
     "Accuracy": [0.72, 0.73, 0.72],
@@ -87,14 +96,8 @@ df = pd.DataFrame(data)
 
 st.subheader("Model Results")
 st.dataframe(df)
-st.markdown("""
-    - **Accuracy**
-            -To measure the proportion of true results (true positives & true negatives) among the total cases. Our goal is to achieve accuracy exceeding 85%, which would indicate strong model performance. Furthermore, we are looking to measure false positive and false negative counts, since those values are crucial when providing a medical diagnosis.
-    - **F1 Score**
-            -To balance precision and recall. Using the F1 score would help us minimize false positives while accurately identifying patients with cardiovascular disease. We aim for an F1 Score of at least 0.75. 
-    - **Receiver Operating Characteristic**       
-            -To assess the model’s ability to accurately distinguish between patients with and without cardiovascular disease. We aim for our mode to have a ROC-AUC score above 0.80. 
-""")
+
+
 
 st.image("figure 1.jpg", use_container_width=True)
 st.image("figure2.jpg", use_container_width=True)
