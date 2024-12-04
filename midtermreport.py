@@ -108,8 +108,7 @@ st.image("confusionmatrixLR.jpg", use_container_width=True)
 st.image("confusionmatrixSVM.jpg", use_container_width=True)
 st.image("confusionrandomforest.jpg", use_container_width=True)
 
-st.write("For the supervised algorithms we have implemented thus far, we have unfortunately not been able to reach the goals we listed above. On our midterm report, our SVM implementation did perform far worse than the other two models, with an accuracy score of 0.53, an F1 score of 0.64, and an ROC-AUC score of 0.59. We believed that these results were to the implementation of our SVM algorithm that has not quite been optimized yet.  So, we went ahead and optimized it. We changed the kernel to be polynomial, because the earlier kernel was not capturing any non-linear relationships in the data. We experimented with differing degrees but found 3 to be the best. The accuracy improved to an accuracy score of 0.72, an F1 score of 0.69, and an ROC-AUC score of 0.5.")
-
+st.write("The above photos represent the confusion matrices for each of the three supervised learning models. As can be seen, the results are quite similar across the three models, particularly between logistic regression and random forest. Once again, this is likely due to the fact that the decision boundaries are very similar for each of the three models, and the same data points seem to cause confusion. SVM seems to be more willing to classify data points as positive since it has more correct true positive judgments, but also more false positive judgments.")
 st.write("**_Integrating PCA with each classifier_**")
 st.write("We tested PCA integrated with each classifier for the purpose of denoising. Based on the variance graph for each component, we chose to retain six principal components, as this selection accounts for 80% of the variance. ")
 
